@@ -1,0 +1,413 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: #333;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+.app-header {
+  background: #007bff;
+  padding: 0 20px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 5px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: none; /* Hidden by default on smaller screens */
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Hide hamburger on laptop and larger screens */
+@media (min-width: 1024px) {
+  .hamburger-btn {
+    display: none;
+  }
+  
+  .logo {
+    display: block; /* Show logo on laptop and larger screens */
+  }
+}
+
+.hamburger-btn span {
+  width: 20px;
+  height: 2px;
+  background: white;
+  transition: 0.3s;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.language-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: white;
+}
+
+.language-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.flag-icon {
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: -280px;
+  width: 280px;
+  height: calc(100vh - 80px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+/* Laptop and larger screens - sidebar always visible */
+@media (min-width: 1024px) {
+  .sidebar {
+    left: 0;
+    width: 280px;
+  }
+  
+  .main-content {
+    margin-left: 280px;
+  }
+}
+
+/* Tablet screens - sidebar overlays content when open */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sidebar.open {
+    left: 0;
+    width: 280px;
+  }
+  
+  .main-content {
+    margin-left: 0; /* No margin adjustment */
+    transition: none; /* Remove transition */
+  }
+  
+  /* Remove the content push effect */
+  .sidebar.open + .sidebar-overlay + .main-content {
+    margin-left: 0;
+  }
+}
+
+/* Mobile screens - sidebar takes full screen when open */
+@media (max-width: 767px) {
+  .sidebar.open {
+    left: 0;
+    width: 100vw;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+.sidebar-nav {
+  padding: 20px 0;
+}
+
+.nav-title {
+  padding: 0 20px 15px;
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.nav-list {
+  list-style: none;
+}
+
+.nav-list li {
+  margin-bottom: 2px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  font-size: 14px;
+}
+
+.nav-link:hover {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.nav-link.active {
+  background: rgba(102, 126, 234, 0.15);
+  color: #667eea;
+  border-right: 3px solid #667eea;
+}
+
+.nav-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.active-dot {
+  position: absolute;
+  right: 15px;
+  width: 8px;
+  height: 8px;
+  background: #667eea;
+  border-radius: 50%;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.sidebar-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hide overlay on laptop and larger screens */
+@media (min-width: 1024px) {
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 80px;
+  padding: 0;
+  background: transparent;
+  min-height: calc(100vh - 80px);
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+/* Under Construction Page */
+.under-construction-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.construction-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 60px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.construction-icon {
+  font-size: 80px;
+  margin-bottom: 30px;
+  animation: bounce 2s infinite;
+}
+
+.construction-container h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.construction-container p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.construction-details {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.construction-details p {
+  color: #667eea;
+  font-size: 16px;
+  margin: 0;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    left: -100%;
+  }
+  
+  .app-header {
+    padding: 0 15px;
+  }
+  
+  .app-title {
+    font-size: 16px;
+  }
+  
+  .language-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .construction-container {
+    padding: 40px 20px;
+  }
+  
+  .construction-container h1 {
+    font-size: 24px;
+  }
+  
+  .construction-container p {
+    font-size: 16px;
+  }
+  
+  .construction-icon {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-left {
+    gap: 10px;
+  }
+  
+  .logo-section {
+    gap: 8px;
+  }
+  
+  .app-title {
+    font-size: 14px;
+  }
+  
+  .construction-container {
+    padding: 30px 15px;
+  }
+  
+  .construction-container h1 {
+    font-size: 20px;
+  }
+  
+  .construction-container p {
+    font-size: 14px;
+  }
+  
+  .construction-icon {
+    font-size: 50px;
+  }
+}

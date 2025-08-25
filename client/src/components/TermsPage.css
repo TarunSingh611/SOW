@@ -1,0 +1,236 @@
+/* Terms Page Styles */
+.terms-page {
+  min-height: 100vh;
+  position: relative;
+}
+
+.terms-background {
+  background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+}
+
+.terms-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Page Title */
+.terms-page-title {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Close Button - Positioned above content box */
+.terms-close-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.3s ease;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.terms-close-button:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Bottom Button - Positioned below content box */
+.terms-bottom-button {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+/* Terms Content */
+.terms-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Terms Body Content */
+.terms-body {
+  padding: 40px;
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: left;
+}
+
+.terms-body h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+}
+
+.terms-body p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.terms-body strong {
+  font-weight: 600;
+}
+
+/* Loading and Error States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin: 40px 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin: 40px 20px;
+  padding: 40px;
+  text-align: center;
+}
+
+.error-container h2 {
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.error-container p {
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .terms-container {
+    padding: 20px 15px;
+  }
+  
+  .terms-page-title {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+  
+  .terms-close-button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+  
+  .terms-bottom-button {
+    margin-top: 30px;
+  }
+  
+  .terms-body {
+    padding: 25px 20px;
+  }
+  
+  .terms-body h2 {
+    font-size: 1.5rem;
+  }
+  
+  .terms-body {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terms-container {
+    padding: 15px 10px;
+  }
+  
+  .terms-page-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .terms-close-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+  
+  .terms-bottom-button {
+    margin-top: 25px;
+  }
+  
+  .terms-body {
+    padding: 20px 15px;
+  }
+  
+  .terms-body h2 {
+    font-size: 1.3rem;
+  }
+  
+  .terms-body {
+    font-size: 14px;
+  }
+}
+
+/* Tablet specific styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .terms-container {
+    max-width: 700px;
+    padding: 2rem;
+  }
+}
+
+/* Large screen styles */
+@media (min-width: 1025px) {
+  .terms-container {
+    max-width: 900px;
+    padding: 3rem;
+  }
+  
+  .terms-body {
+    font-size: 1.1rem;
+  }
+}
