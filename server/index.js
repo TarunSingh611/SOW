@@ -1,7 +1,7 @@
 const fastify = require('fastify')({ logger: true });
 const path = require('path');
 const { globalErrorHandler } = require('./utils/errorHandler');
-const sequelize = require('./database/config');
+const { sequelize, testConnection } = require('./database/config');
 require('dotenv').config();
 
 // Use environment variable for port with fallback
@@ -19,9 +19,25 @@ fastify.register(require('@fastify/cors'), {
 // Register routes
 fastify.register(require('./routes/pricelist'), { prefix: '/api/pricelist' });
 
-// Health check endpoint
+// Health check endpoint with database status
 fastify.get('/health', async (request, reply) => {
-  return { status: 'OK', timestamp: new Date().toISOString() };
+  try {
+    // Test database connection
+    await sequelize.authenticate();
+    return { 
+      status: 'OK', 
+      timestamp: new Date().toISOString(),
+      database: 'connected'
+    };
+  } catch (error) {
+    request.log.error('Health check failed:', error);
+    return reply.status(503).send({ 
+      status: 'ERROR', 
+      timestamp: new Date().toISOString(),
+      database: 'disconnected',
+      error: error.message
+    });
+  }
 });
 
 // Serve static files and handle client-side routing
@@ -70,9 +86,8 @@ fastify.get('/*', async (request, reply) => {
 
 const start = async () => {
   try {
-    // Test database connection
-    await sequelize.authenticate();
-    console.log('Database connection established successfully.');
+    // Test database connection with retry logic
+    await testConnection();
 
     // Sync database models (in development)
     if (process.env.NODE_ENV === 'development') {
@@ -84,9 +99,46 @@ const start = async () => {
     await fastify.listen({ port: PORT, host: '0.0.0.0' });
     console.log(`Server is running on http://localhost:${PORT}`);
   } catch (err) {
-    fastify.log.error(err);
+    fastify.log.error('Failed to start server:', err);
     process.exit(1);
   }
 };
+
+// Graceful shutdown handling
+const gracefulShutdown = async (signal) => {
+  console.log(`Received ${signal}. Starting graceful shutdown...`);
+  
+  try {
+    // Close Fastify server
+    await fastify.close();
+    console.log('Fastify server closed.');
+    
+    // Close database connection
+    await sequelize.close();
+    console.log('Database connection closed.');
+    
+    console.log('Graceful shutdown completed.');
+    process.exit(0);
+  } catch (error) {
+    console.error('Error during graceful shutdown:', error);
+    process.exit(1);
+  }
+};
+
+// Handle different shutdown signals
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  gracefulShutdown('uncaughtException');
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  gracefulShutdown('unhandledRejection');
+});
 
 start();
