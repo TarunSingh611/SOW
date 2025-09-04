@@ -20,12 +20,7 @@ export class ProductService {
     this.debouncedSearch = debounce(this._filterProducts.bind(this), 300);
   }
 
-  /**
-   * Fetch products with loading state management
-   * @param {Function} setLoading - Loading state setter
-   * @param {Function} setError - Error state setter
-   * @returns {Promise<Array>} Array of products
-   */
+
   async fetchProducts(setLoading, setError) {
     try {
       setLoading(true);
@@ -39,14 +34,7 @@ export class ProductService {
     }
   }
 
-  /**
-   * Save product field with optimistic updates
-   * @param {number} productId - Product ID
-   * @param {string} field - Field name
-   * @param {any} value - New value
-   * @param {Function} setProducts - Products state setter
-   * @returns {Promise<void>}
-   */
+
   async saveProductField(productId, field, value, setProducts) {
     try {
       // Optimistic update
@@ -66,12 +54,7 @@ export class ProductService {
     }
   }
 
-  /**
-   * Add new product
-   * @param {Object} productData - Product data
-   * @param {Function} setProducts - Products state setter
-   * @returns {Promise<Object>} Created product
-   */
+
   async addProduct(productData, setProducts) {
     try {
       const addedProduct = await this.throttledAdd(productData);
@@ -82,13 +65,6 @@ export class ProductService {
     }
   }
 
-  /**
-   * Edit product
-   * @param {number} productId - Product ID
-   * @param {Object} productData - Product data
-   * @param {Function} setProducts - Products state setter
-   * @returns {Promise<void>}
-   */
   async editProduct(productId, productData, setProducts) {
     try {
       await this.throttledEdit(productId, productData);
@@ -104,12 +80,7 @@ export class ProductService {
     }
   }
 
-  /**
-   * Delete product
-   * @param {number} productId - Product ID
-   * @param {Function} setProducts - Products state setter
-   * @returns {Promise<void>}
-   */
+
   async deleteProduct(productId, setProducts) {
     try {
       await this.throttledDelete(productId);
@@ -121,13 +92,7 @@ export class ProductService {
     }
   }
 
-  /**
-   * Filter products based on search criteria
-   * @param {Array} products - All products
-   * @param {string} searchArticleNo - Article number search
-   * @param {string} searchProduct - Product name search
-   * @returns {Array} Filtered products
-   */
+
   filterProducts(products, searchArticleNo, searchProduct) {
     // For immediate filtering, use the direct method
     // Debounced search is only for search input changes
@@ -141,11 +106,7 @@ export class ProductService {
     this.throttledPrint();
   }
 
-  /**
-   * Refresh products cache and data
-   * @param {Function} setProducts - Products state setter
-   * @returns {Promise<void>}
-   */
+
   async refreshProducts(setProducts) {
     try {
       ProductsAPI.clearCache();
@@ -156,12 +117,6 @@ export class ProductService {
     }
   }
 
-  /**
-   * Format product data for display
-   * @param {Object} product - Product object
-   * @param {string} language - Current language
-   * @returns {Object} Formatted product
-   */
   formatProductForDisplay(product, language) {
     return {
       ...product,
