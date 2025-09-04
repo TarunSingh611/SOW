@@ -113,7 +113,6 @@ a {
 }
 
 .dropdownList {
-    display: none;
     font-weight: 500;
     /* width: max-content; */
     background: #fff;
@@ -140,9 +139,6 @@ a {
         0 4px 6px -4px rgba(34, 34, 34, 0.7);
 }
 
-.dropdownList.dropdown-open {
-    display: block;
-}
 
 .drop-down-element {
     transition-duration: 700ms;
@@ -189,34 +185,26 @@ a {
 }
 
 .menu-drop-down {
-    height: 0px;
-    opacity: 0;
+    display: none;
     margin-top: 3rem;
     top: 0px;
-    /* display: none; */
     left: 0rem;
-    transition:
-        height 0.3s ease-in-out,
-        opacity 0.3s ease-in-out,
-        width 0.3s ease-in-out;
     position: absolute;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
 }
 
 .menu-drop-down.menu-drop-down-open {
-    height: auto;
-    opacity: 1;
+    max-height: 500px;
 }
+
 
 @media (max-width: 1269px) {
     .menu-drop-down {
-        overflow: hidden;
+        display: block;
         width: 19rem;
-        height: 0px;
         background-color: white;
-        opacity: 1;
-        /* --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-          --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-          box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); */
         box-shadow:
             0 10px 15px -3px rgba(0, 0, 0, 0.1),
             0 4px 6px -4px rgba(0, 0, 0, 0.1);
@@ -238,10 +226,6 @@ a {
 }
 
 @media (min-width: 1270px) {
-    .menu-drop-down {
-        display: none;
-    }
-
     .dropdownList {
         right: 2px;
         margin-top: 1rem;

@@ -1,14 +1,66 @@
 import "../styles/termsPage.css";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useState, useRef, useEffect } from "react";
 
 const TermsPage = () => {
-  const { t } = useLanguage();
+  const { t, language, setLanguage, getLanguageName, getFlagUrl } = useLanguage();
   const navigate = useNavigate();
+  
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
+  
+  const dropdownRef = useRef(null);
+  const mobileDropdownRef = useRef(null);
+  const hamburgerMenuRef = useRef(null);
 
   const handleClose = () => {
     navigate("/");
   };
+
+  const handleLanguageSelect = (lang) => {
+    setLanguage(lang);
+    setIsDropdownOpen(false);
+    setIsMobileDropdownOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleMobileDropdown = () => {
+    setIsMobileDropdownOpen(!isMobileDropdownOpen);
+  };
+
+  const toggleHamburgerMenu = (e) => {
+    e.stopPropagation();
+    setIsHamburgerMenuOpen(!isHamburgerMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Don't close if clicking on the hamburger icon itself
+      if (event.target.closest('.open-menu-dds')) {
+        return;
+      }
+      
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target)) {
+        setIsMobileDropdownOpen(false);
+      }
+      if (hamburgerMenuRef.current && !hamburgerMenuRef.current.contains(event.target)) {
+        setIsHamburgerMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="terms-container">
@@ -31,7 +83,7 @@ const TermsPage = () => {
                 />
               </a>
             </div>
-            <div className="open-menu-dds">
+            <div className="open-menu-dds" onClick={toggleHamburgerMenu}>
               <svg
                 stroke="currentColor"
                 fill="currentColor"
@@ -45,28 +97,38 @@ const TermsPage = () => {
                 <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
               </svg>
             </div>
-            <div className="navigation-menu-bar">
-              <div className="menu-drop-down">
+            <div className="navigation-menu-bar" ref={hamburgerMenuRef}>
+              <div className={`menu-drop-down ${isHamburgerMenuOpen ? 'menu-drop-down-open' : ''}`}>
                 <div className="menu-drop-down-container">
-                  <a className="menu-drop-down-item" href="#">
-                    <span className="collectionSpan">
-                      <p className="menu-item-name">{t("terms.nav.home")}</p>
-                    </span>
-                  </a>
-                  <a className="menu-drop-down-item" href="#">
-                    <span className="collectionSpan">
-                      <p className="menu-item-name">{t("terms.nav.order")}</p>
-                    </span>
-                  </a>
-                  <a className="menu-drop-down-item" href="#">
-                    <span className="collectionSpan">
-                      <p className="menu-item-name">
-                        {t("terms.nav.contactUs")}
-                      </p>
-                    </span>
-                  </a>
+                    <a className="menu-drop-down-item" href="#" onClick={(e) => e.preventDefault()}>
+                      <span className="collectionSpan">
+                        <p className="menu-item-name">{t("terms.nav.home")}</p>
+                      </span>
+                    </a>
+                    <a className="menu-drop-down-item" href="#" onClick={(e) => e.preventDefault()}>
+                      <span className="collectionSpan">
+                        <p className="menu-item-name">{t("terms.nav.order")}</p>
+                      </span>
+                    </a>
+                    <a className="menu-drop-down-item" href="#" onClick={(e) => e.preventDefault()}>
+                      <span className="collectionSpan">
+                        <p className="menu-item-name">{t("terms.nav.ourCustomers")}</p>
+                      </span>
+                    </a>
+                    <a className="menu-drop-down-item" href="#" onClick={(e) => e.preventDefault()}>
+                      <span className="collectionSpan">
+                        <p className="menu-item-name">{t("terms.nav.aboutUs")}</p>
+                      </span>
+                    </a>
+                    <a className="menu-drop-down-item" href="#" onClick={(e) => e.preventDefault()}>
+                      <span className="collectionSpan">
+                          <p className="menu-item-name">
+                          {t("terms.nav.contactUs")}
+                        </p>
+                      </span>
+                    </a>
+                  </div>
                 </div>
-              </div>
               <div className="pc-menu">
                 <a className="pc-menu-items" href="#">
                   <span className="collectionSpan">
@@ -95,15 +157,15 @@ const TermsPage = () => {
                     <p className="collectionitem">{t("terms.nav.contactUs")}</p>
                   </span>
                 </a>
-                <a className="pc-menu-items language-pc-menu-items" href="#">
+                <a className="pc-menu-items language-pc-menu-items" href="#" onClick={(e) => { e.preventDefault(); toggleDropdown(); }}>
                   <div className="">
                     <div className="language-title-box">
                       {" "}
                       <p className="language-name">
-                        English
+                        {getLanguageName(language)}
                       </p>
                       <img
-                        src="https://storage.123fakturere.no/public/flags/GB.png"
+                        src={getFlagUrl(language)}
                         className="flag-icon drop-down-image"
                         alt=""
                       />{" "}
@@ -111,10 +173,51 @@ const TermsPage = () => {
                   </div>
                 </a>
               </div>
-              <div className="lang-drop">
+              <div className="lang-drop" ref={dropdownRef}>
                 <div className="lang-drop-container">
+                  {isDropdownOpen && (
+                    <div className="dropdownList">
+                      <div className="language-Svenska drop-down-element" onClick={() => handleLanguageSelect('sv')}>
+                        <div className="drop-down-lang-name">Svenska</div>
+                        <div className="drop-down-image-div">
+                          <img
+                            src="https://storage.123fakturere.no/public/flags/SE.png"
+                            className="drop-down-image"
+                            alt="Svenska"
+                          />
+                        </div>
+                      </div>
+                      <div className="language-English drop-down-element" onClick={() => handleLanguageSelect('en')}>
+                        <div className="drop-down-lang-name">English</div>
+                        <div className="drop-down-image-div">
+                          <img
+                            src="https://storage.123fakturere.no/public/flags/GB.png"
+                            className="drop-down-image"
+                            alt="English"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="lang-dropk" ref={mobileDropdownRef}>
+              <div>
+                <div className="dropdownContainer" onClick={toggleMobileDropdown}>
+                  <div className="language-box">
+                    {" "}
+                    <p className="flag-name collectionitem">{getLanguageName(language)}</p>
+                    <img
+                      src={getFlagUrl(language)}
+                      className="icon-flag-nav"
+                      alt={getLanguageName(language)}
+                    />{" "}
+                  </div>
+                </div>
+                {isMobileDropdownOpen && (
                   <div className="dropdownList">
-                    <div className="language-Svenska drop-down-element">
+                    <div className="language-Svenska drop-down-element" onClick={() => handleLanguageSelect('sv')}>
                       <div className="drop-down-lang-name">Svenska</div>
                       <div className="drop-down-image-div">
                         <img
@@ -124,7 +227,7 @@ const TermsPage = () => {
                         />
                       </div>
                     </div>
-                    <div className="language-English drop-down-element">
+                    <div className="language-English drop-down-element" onClick={() => handleLanguageSelect('en')}>
                       <div className="drop-down-lang-name">English</div>
                       <div className="drop-down-image-div">
                         <img
@@ -135,44 +238,7 @@ const TermsPage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="lang-dropk">
-              <div>
-                <div className="dropdownContainer">
-                  <div className="language-box">
-                    {" "}
-                    <p className="flag-name collectionitem">English</p>
-                    <img
-                      src="https://storage.123fakturere.no/public/flags/GB.png"
-                      className="icon-flag-nav"
-                      alt="English"
-                    />{" "}
-                  </div>
-                </div>
-                <div className="dropdownList">
-                  <div className="language-Svenska drop-down-element">
-                    <div className="drop-down-lang-name">Svenska</div>
-                    <div className="drop-down-image-div">
-                      <img
-                        src="https://storage.123fakturere.no/public/flags/SE.png"
-                        className="drop-down-image"
-                        alt="Svenska"
-                      />
-                    </div>
-                  </div>
-                  <div className="language-English drop-down-element">
-                    <div className="drop-down-lang-name">English</div>
-                    <div className="drop-down-image-div">
-                      <img
-                        src="https://storage.123fakturere.no/public/flags/GB.png"
-                        className="drop-down-image"
-                        alt="English"
-                      />
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </section>
