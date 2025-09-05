@@ -6,6 +6,45 @@ export default {
     termsAndConditions: "Villkor",
   },
 
+  contentHeader: {
+    searchArticleNo: "Sök artikelnummer...",
+    searchProduct: "Sök produkt...",
+    newProduct: "Ny produkt",
+    printList: "Skriv ut lista",
+    advancedMode: "Avancerat läge",
+  },
+
+  contentTable: {
+    header: {
+      articleNo: "Artikelnummer",
+      product: "Produkt",
+      service: "Tjänst",
+      inPrice: "Inpris",
+      price: "Pris",
+      unit: "Enhet",
+      inStock: "I lager",
+      description: "Beskrivning",
+    },
+  },
+
+  pricelist: {
+    nav: {
+      invoices: "Fakturor",
+      customers: "Kunder",
+      myBusiness: "Mitt företag",
+      invoiceJournal: "Fakturajournal",
+      priceList: "Prislista",
+      multipleInvocing: "Massfakturering",
+      unpaidInvoices: "Obetalda fakturor",
+      offer: "Offert",
+      inventoryControl: "Lagerkontroll",
+      memberInvoicing: "Medlemsfakturering",
+      import: "Importera",
+      export: "Exportera",
+      logOut: "Logga ut",
+    },
+  },
+
   // Terms Page
   terms: {
     nav: {

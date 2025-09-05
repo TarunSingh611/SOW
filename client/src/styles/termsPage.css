@@ -238,6 +238,10 @@ a {
     height: 100%;
 }
 
+.scrollable-menu-container {
+    overflow-y: scroll;
+}
+
 .menu-drop-down-item {
     font-size: 15px;
     font-weight: 600;

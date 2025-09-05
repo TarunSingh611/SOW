@@ -1,15 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '../contexts/LanguageContext';
+import React from "react";
+import PricelistNavigation from "../components/pricelist/PricelistNavigation";
+import PricelistSideMenu from "../components/pricelist/PricelistSideMenu";
+import PricelistContent from "../components/pricelist/PricelistContent";
+import styles from "../styles/pricelistPage.module.css";
 
-const NotFoundPage = () => {
-  const { t } = useLanguage();
+const PricelistPage = () => {
 
   return (
-    <div>
-      <h1>Pricelist</h1>
+    <div className={styles.pricelistPage}>
+      <PricelistNavigation />
+      <div className={styles.pricelistBody}>
+        <PricelistSideMenu />
+        <PricelistContent />
+      </div>
     </div>
   );
 };
 
-export default NotFoundPage;
+export default PricelistPage;

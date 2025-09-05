@@ -6,6 +6,45 @@ export default {
     termsAndConditions: "Terms & Conditions",
   },
 
+  pricelist: {
+    nav: {
+     invoices: "Invoices",
+      customers: "Customers",
+      myBusiness: "My Business",
+      invoiceJournal: "Invoice Journal",
+      priceList: "Price List",
+      multipleInvocing: "Multiple Invoicing",
+      unpaidInvoices: "Unpaid Invoices",
+      offer: "Offer",
+      inventoryControl: "Inventory Control",
+      memberInvoicing: "Member Invoicing",
+      import: "Import",
+      export: "Export",
+      logOut: "Log Out",
+    },
+  },
+
+  contentTable: {
+    header: {
+      articleNo: "Article No",
+      product: "Product",
+      service: "Service",
+      inPrice: "In Price",
+      price: "Price",
+      unit: "Unit",
+      inStock: "In Stock",
+      description: "Description",
+    },
+  },
+
+  contentHeader: {
+    searchArticleNo: "Search Article No...",
+    searchProduct: "Search Product...",
+    newProduct: "New Product",
+    printList: "Print List",
+    advancedMode: "Advanced mode",
+  },
+
   // Terms Page
   terms: {
     nav: {

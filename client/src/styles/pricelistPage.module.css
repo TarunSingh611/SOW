@@ -1,0 +1,447 @@
+.navigationOut {
+    background-color: #0f7ee9;
+    padding: 0.6rem;
+    position: fixed;
+}
+
+.navigationHeader {
+    padding: 0;
+    width: 88%;
+    margin: auto;
+}
+
+.languageName{
+    font-weight: 100;
+    line-height: 18px;
+    margin-right: 1rem;
+    color: white;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.logoa {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navigationLogo {
+    max-width: 100%;
+    margin-top: 0;
+    height: 100%;
+}
+
+.avtarImage {
+    height: 3.9rem;
+    max-width: 100%;
+}
+
+.userName {
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+}
+
+.userBusiness {
+    font-size: 11px;
+    font-weight: 100;
+    color: white;
+}
+
+
+@media (max-width: 1269px) {
+    .logoa{
+        display: none;
+    }
+    .navigationOut {
+        padding: 1.4rem;
+    }
+    
+}
+
+.pricelistBody {
+    top: 5.4rem;
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 5.4rem);
+}
+
+
+/* //////////sidebar//////////////// */
+
+.sideMenu {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    min-height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    width: 215px;
+    position: fixed;
+    height: 100%;
+    top: 5.4rem;
+    z-index: 100;
+    left: 0;
+}
+
+@media (max-width: 1269px) {
+    .sideMenu {
+        display: none;
+    }
+}
+
+
+.menuTitle {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    width: 84%;
+    margin: auto;
+    color: #333;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #87CEEB;
+}
+
+.menuItems {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuItem {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.menuItem:hover {
+    background-color: #f5f5f5;
+}
+
+.menuItem.selected {
+    background-color: #f0f8ff;
+}
+
+.menuItem.inactive {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.menuItem.inactive:hover {
+    background-color: transparent;
+}
+
+.selectedIndicator {
+    position: absolute;
+    left: -0.05rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #32CD32;
+    border-radius: 50%;
+}
+
+.menuIcon {
+    font-size: 16px;
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+}
+
+.menuText {
+    font-size: 12px;
+    color: #333;
+    font-weight: 400;
+}
+
+.menuItem.inactive .menuText {
+    color: #999;
+}
+
+.menuItem.selected .menuText {
+    color: #0f7ee9;
+    font-weight: 500;
+}
+
+/* //////////content//////////////// */
+
+.pricelistContent {
+    background-color: #ffffff;
+    padding: 1rem;
+    gap: 1rem;
+    margin-left: 215px;
+    position: fixed;
+    width: calc(100% - 215px);
+    height: calc(100vh - 5.4rem);
+    right: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 1269px) {
+    .pricelistContent{
+        margin-left:0;
+        width: 100%;
+    }
+}
+
+.menuItem{
+    padding: 0.4rem 0.8rem;
+    height: 48px;
+}
+
+
+/* Content Header Styles */
+.contentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.searchField{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #e0e0e0;
+    padding: 0.05rem 0.5rem;
+    margin: 0.2rem;
+    width: 265px;
+    border-radius: 16px;
+}
+
+.actionButtons{
+    display: flex;
+    gap: 0.5rem;
+
+}
+
+.actionButton{
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border: #e0e0e0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0.9rem;
+    margin: 0.2rem;
+    gap: 0.2rem;
+    /* width: 100px; */
+    border-radius: 18px;
+}
+
+@media screen and (max-width: 1269px) {
+    .buttonText{
+        display: none;
+    }
+
+    .actionButton{
+        padding: 0.5rem 2.5rem;
+    }
+}
+
+
+@media (max-width: 1000px)  {
+    .contentHeader{
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0rem 0rem;
+    }
+    
+    .searchInputs, .searchSection {
+        width: 100%;
+    }
+
+    .searchField{
+        margin-bottom: 0.5rem;
+        padding: 0.3rem 1rem;
+        width: 100%;
+    }
+
+    .actionButtons{
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .actionButton{
+        padding: 0.5rem 2.5rem;
+    }
+}
+
+@media (max-width: 376px)  {
+    .actionButton{
+        padding: 3% 10%;
+        gap: 0.1rem;
+        margin: 0.1rem;
+    }
+}
+
+
+/* ////////content table//////////////// */
+
+.contentTable {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 1rem 0;
+    height: 100%;
+    flex: 1;
+}
+
+.contentTableHeader {
+    display: grid;
+    font-weight: 600;
+    color: #495057;
+}
+
+.contentTableRow {
+    display: grid;
+    transition: background-color 0.2s ease;
+}
+
+.contentTableRow, .contentTableHeader {
+    grid-template-columns: 40px 100px 1fr 80px 80px 80px 80px 1fr 40px;
+    font-size: 12px;
+    text-align: left;
+}
+
+@media (max-width: 1269px) {
+    .contentTableHeader > :nth-child(4),
+    .contentTableRow    > :nth-child(4),
+    .contentTableHeader > :nth-child(8),
+    .contentTableRow    > :nth-child(8)
+    {
+      display: none;
+    }
+
+    .contentTableRow,
+    .contentTableHeader {
+        grid-template-columns: 60px 120px 1fr 100px 160px 100px 60px ;
+    }
+
+}
+
+@media (max-width: 1000px) {
+
+    .contentTableHeader > :nth-child(2),
+    .contentTableRow    > :nth-child(2),
+    .contentTableHeader > :nth-child(6),
+    .contentTableRow    > :nth-child(6),
+    .contentTableHeader > :nth-child(7),
+    .contentTableRow    > :nth-child(7)
+    {
+      display: none;
+    }
+
+    .contentTableRow,
+    .contentTableHeader {
+        grid-template-columns: 60px 1fr 120px 60px;
+    }
+
+}
+
+.tableText{
+    border: 1px solid #87CEEB;
+    border-radius: 16px;
+    padding: 0rem;
+    margin: 0.2rem;
+}
+
+
+.contentTableHeaderItem {
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    min-height: 40px;
+}
+
+.contentTableHeaderItem:last-child {
+    border-right: none;
+}
+
+.contentTableBody {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: calc(100vh - 180px);
+    flex: 1;
+}
+
+
+
+.contentTableRow:last-child {
+    border-bottom: none;
+}
+
+.contentTableBodyItem {
+    display: flex;
+    justify-content: left;
+    min-height: 40px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.contentTableBodyItem:last-child {
+    border-right: none;
+}
+
+/* Editable Cell Styles */
+.editableCell {
+    width: 100%;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left;
+    background-color: transparent;
+    border: 1px solid #87CEEB;
+    border-radius: 16px;
+    padding: 0.3rem 0.5rem;
+    margin: 0.1rem;
+    min-height: 32px;
+}
+
+.editableCell:hover {
+    background-color: #f0f8ff;
+    border-color: #87CEEB;
+}
+
+.editableInput {
+    width: 100%;
+    min-height: 32px;
+    padding: 0.3rem 0.5rem;
+    border: 2px solid #0f7ee9;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: left;
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(15, 126, 233, 0.1);
+}
+
+.editableInput:focus {
+    border-color: #0f7ee9;
+    box-shadow: 0 0 0 3px rgba(15, 126, 233, 0.2);
+}
+
+
+/* Loading and Empty States */
+.loadingMessage, .emptyMessage {
+    padding: 2rem;
+    text-align: center;
+    font-size: 16px;
+    margin: 1rem;
+}
+
+

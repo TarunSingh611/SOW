@@ -17,7 +17,6 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   min-height: 100svh;
-  padding-bottom: 10rem;
   background-color: #7ca6ff;
   -webkit-text-size-adjust: 100%;
 }
