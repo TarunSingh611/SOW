@@ -1,6 +1,9 @@
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useState, useRef, useEffect } from "react";
-import styles from "../../styles/pricelistPage.module.css"
+import styles from "../../styles/pricelistPage.module.css";
+import diamondImage from "../../assets/diamond.png";
+import seFlag from "../../assets/SE.png";
+import gbFlag from "../../assets/GB.png";
 
 const PricelistNavigation = () => {
   const { t, language, setLanguage, getLanguageName, getFlagUrl } = useLanguage();
@@ -245,7 +248,7 @@ const PricelistNavigation = () => {
                       <div className="drop-down-lang-name">Svenska</div>
                       <div className="drop-down-image-div">
                         <img
-                          src="https://storage.123fakturere.no/public/flags/SE.png"
+                          src={seFlag}
                           className="drop-down-image"
                           alt="Svenska"
                         />
@@ -258,7 +261,7 @@ const PricelistNavigation = () => {
                       <div className="drop-down-lang-name">English</div>
                       <div className="drop-down-image-div">
                         <img
-                          src="https://storage.123fakturere.no/public/flags/GB.png"
+                          src={gbFlag}
                           className="drop-down-image"
                           alt="English"
                         />
@@ -293,7 +296,7 @@ const PricelistNavigation = () => {
                     <div className="drop-down-lang-name">Svenska</div>
                     <div className="drop-down-image-div">
                       <img
-                        src="https://storage.123fakturere.no/public/flags/SE.png"
+                        src={seFlag}
                         className="drop-down-image"
                         alt="Svenska"
                       />
@@ -306,7 +309,7 @@ const PricelistNavigation = () => {
                     <div className="drop-down-lang-name">English</div>
                     <div className="drop-down-image-div">
                       <img
-                        src="https://storage.123fakturere.no/public/flags/GB.png"
+                        src={gbFlag}
                         className="drop-down-image"
                         alt="English"
                       />

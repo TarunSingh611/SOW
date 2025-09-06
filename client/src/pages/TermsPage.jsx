@@ -2,6 +2,10 @@ import "../styles/termsPage.css";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useState, useRef, useEffect } from "react";
+import diamondImage from "../assets/diamond.png";
+import sverigeImage from "../assets/sverige43.jpg";
+import seFlag from "../assets/SE.png";
+import gbFlag from "../assets/GB.png";
 
 const TermsPage = () => {
   const { t, language, setLanguage, getLanguageName, getFlagUrl } = useLanguage();
@@ -66,7 +70,7 @@ const TermsPage = () => {
     <div className="terms-container">
       <div className="background-container">
         <img
-          src="https://storage.123fakturera.se/public/wallpapers/sverige43.jpg"
+          src={sverigeImage}
           alt=""
           id="background-image"
         />
@@ -79,7 +83,7 @@ const TermsPage = () => {
                 <img
                   alt=""
                   className="navigation-logo"
-                  src="https://storage.123fakturera.se/public/icons/diamond.png"
+                  src={diamondImage}
                 />
               </a>
             </div>
@@ -181,7 +185,7 @@ const TermsPage = () => {
                         <div className="drop-down-lang-name">Svenska</div>
                         <div className="drop-down-image-div">
                           <img
-                            src="https://storage.123fakturere.no/public/flags/SE.png"
+                            src={seFlag}
                             className="drop-down-image"
                             alt="Svenska"
                           />
@@ -191,7 +195,7 @@ const TermsPage = () => {
                         <div className="drop-down-lang-name">English</div>
                         <div className="drop-down-image-div">
                           <img
-                            src="https://storage.123fakturere.no/public/flags/GB.png"
+                            src={gbFlag}
                             className="drop-down-image"
                             alt="English"
                           />
@@ -221,7 +225,7 @@ const TermsPage = () => {
                       <div className="drop-down-lang-name">Svenska</div>
                       <div className="drop-down-image-div">
                         <img
-                          src="https://storage.123fakturere.no/public/flags/SE.png"
+                          src={seFlag}
                           className="drop-down-image"
                           alt="Svenska"
                         />
@@ -231,7 +235,7 @@ const TermsPage = () => {
                       <div className="drop-down-lang-name">English</div>
                       <div className="drop-down-image-div">
                         <img
-                          src="https://storage.123fakturere.no/public/flags/GB.png"
+                          src={gbFlag}
                           className="drop-down-image"
                           alt="English"
                         />

@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { locales } from '../locale';
+import seFlag from '../assets/SE.png';
+import gbFlag from '../assets/GB.png';
 
 const LanguageContext = createContext();
 
@@ -43,8 +45,8 @@ export const LanguageProvider = ({ children }) => {
 
   const getFlagUrl = (lang) => {
     return lang === 'sv' 
-      ? 'https://storage.123fakturere.no/public/flags/SE.png'
-      : 'https://storage.123fakturere.no/public/flags/GB.png';
+      ? seFlag
+      : gbFlag;
   };
 
   // Detect browser language on mount
