@@ -88,7 +88,7 @@ const PricelistSideMenu = () => {
                 {menuItems.map((item) => (
                     <div 
                         key={item.id} 
-                        className={`${styles.menuItem} ${!item.active ? styles.inactive : ''} ${item.selected ? styles.selected : ''}`}
+                        className={`${styles.sideMenuItem} ${!item.active ? styles.inactive : ''} ${item.selected ? styles.selected : ''}`}
                     >
                         {item.selected && <div className={styles.selectedIndicator}></div>}
                         <span className={styles.menuIcon}>{item.icon}</span>
