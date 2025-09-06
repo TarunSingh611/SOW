@@ -21,7 +21,6 @@ const ContentTable = () => {
     const fetchProducts = useCallback(async () => {
         try {
             const fetchedProducts = await productService.fetchProducts(setLoading);
-            console.log('fetchedProducts', fetchedProducts);
             setProducts(fetchedProducts);
         } catch (error) {
             console.error('Error fetching products:', error);

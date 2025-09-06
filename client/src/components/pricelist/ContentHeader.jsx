@@ -18,12 +18,10 @@ const ContentHeader = () => {
 
     const handleNewProduct = () => {
         // TODO: Implement new product functionality
-        console.log('New Product clicked');
     };
 
     const handlePrintList = () => {
         // TODO: Implement print list functionality
-        console.log('Print List clicked');
     };
 
     const handleAdvancedMode = () => {
