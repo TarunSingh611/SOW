@@ -42,20 +42,6 @@ html {
   z-index: -100;
 }
 
-
-@supports (height: 100svh) {
-  .background-container {
-    height: 100svh;
-  }
-}
-
-
-@supports (height: 100dvh) {
-  .background-container {
-    height: 100dvh;
-  }
-}
-
 #background-image {
   width: 100%;
   min-height: 100%;
