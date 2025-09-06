@@ -21,13 +21,11 @@ export class ProductService {
   }
 
 
-  async fetchProducts(setLoading, setError) {
+  async fetchProducts(setLoading) {
     try {
       setLoading(true);
-      setError(null);
       return await this.throttledFetch();
     } catch (error) {
-      setError(error.message);
       throw error;
     } finally {
       setLoading(false);

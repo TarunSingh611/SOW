@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from "../../styles/pricelistPage.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
-import { ProductsAPI } from "../../api/products";
+import { productService } from '../../services/productService.js';
+import { ProductsAPI } from '../../api/products.js';
+import { formatPrice } from '../../utils/formatters.js';
 import { useToast } from "../../contexts/ToastContext";
 
 const ContentTable = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const { showToast } = useToast();
     
     const [products, setProducts] = useState([]);
@@ -13,12 +15,13 @@ const ContentTable = () => {
     const [editingCell, setEditingCell] = useState(null);
     const [editingValue, setEditingValue] = useState('');
     const [saving, setSaving] = useState(false);
+    const [activeRow, setActiveRow] = useState(null);
 
     // Fetch products from database
     const fetchProducts = useCallback(async () => {
         try {
-            setLoading(true);
-            const fetchedProducts = await ProductsAPI.fetchProducts();
+            const fetchedProducts = await productService.fetchProducts(setLoading);
+            console.log('fetchedProducts', fetchedProducts);
             setProducts(fetchedProducts);
         } catch (error) {
             console.error('Error fetching products:', error);
@@ -33,10 +36,16 @@ const ContentTable = () => {
         fetchProducts();
     }, [fetchProducts]);
 
+    // Handle row click to set active row
+    const handleRowClick = (productId) => {
+        setActiveRow(productId);
+    };
+
     // Handle cell edit start
     const handleEditStart = (productId, field, currentValue) => {
         setEditingCell(`${productId}-${field}`);
         setEditingValue(currentValue || '');
+        setActiveRow(productId); // Set this row as active when editing
     };
 
     // Handle cell edit cancel
@@ -147,20 +156,21 @@ const ContentTable = () => {
 
             {/* Body */}
             <div className={styles.contentTableBody}>
-                {products.length === 0 ? (
+                {products && products?.length === 0 ? (
                     <div className={styles.emptyMessage}>
                         No products found. 
                     </div>
                 ) : (
-                    products.map((product) => (
-                        <div key={product.id} className={styles.contentTableRow}>
-                            <div className={styles.contentTableBodyItem}>
+                    products && products?.length > 0 && products?.map((product) => (
+                        <div key={product.id} className={styles.contentTableRow} onClick={() => handleRowClick(product.id)}>
+                            <div className={`${styles.contentTableBodyItem} ${styles.rightArrow} ${activeRow === product.id ? styles.active : ''}`}>
+                                ⟶
                             </div>
                             <div className={styles.contentTableBodyItem}>
                                 {renderEditableCell(product, 'article_no', product.article_no)}
                             </div>
                             <div className={styles.contentTableBodyItem}>
-                                {renderEditableCell(product, 'name', product.name)}
+                                {renderEditableCell(product, language === 'sv' ? 'name_sv' : 'name', language === 'sv' ? product.name_sv : product.name)}
                             </div>
                             <div className={styles.contentTableBodyItem}>
                                 {renderEditableCell(product, 'in_price', product.in_price, 'number')}
@@ -175,9 +185,9 @@ const ContentTable = () => {
                                 {renderEditableCell(product, 'in_stock', product.in_stock, 'number')}
                             </div>
                             <div className={styles.contentTableBodyItem}>
-                                {renderEditableCell(product, 'description', product.description)}
+                                {renderEditableCell(product, language === 'sv' ? 'description_sv' : 'description', language === 'sv' ? product.description_sv : product.description)}
                             </div>
-                            <div className={styles.contentTableBodyItem}></div>
+                            <div className={`${styles.contentTableBodyItem}  ${styles.threeDots}`}>⋯</div>
                         </div>
                     ))
                 )}

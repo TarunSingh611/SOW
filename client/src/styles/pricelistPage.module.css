@@ -307,7 +307,7 @@
 }
 
 .contentTableRow, .contentTableHeader {
-    grid-template-columns: 40px 100px 1fr 80px 80px 80px 80px 1fr 40px;
+    grid-template-columns: 20px 100px 1fr 80px 80px 80px 80px 1fr 30px;
     font-size: 12px;
     text-align: left;
 }
@@ -323,7 +323,7 @@
 
     .contentTableRow,
     .contentTableHeader {
-        grid-template-columns: 60px 120px 1fr 100px 160px 100px 60px ;
+        grid-template-columns: 20px 120px 1fr 100px 160px 100px 30px ;
     }
 
 }
@@ -342,7 +342,7 @@
 
     .contentTableRow,
     .contentTableHeader {
-        grid-template-columns: 60px 1fr 120px 60px;
+        grid-template-columns: 20px 1fr 80px 30px;
     }
 
 }
@@ -371,11 +371,18 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: calc(100vh - 180px);
     flex: 1;
+    /* Hide scrollbar for all browsers */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+.contentTableBody::-webkit-scrollbar {
+    display: none;
+}
 
 .contentTableRow:last-child {
     border-bottom: none;
@@ -384,8 +391,9 @@
 .contentTableBodyItem {
     display: flex;
     justify-content: left;
-    min-height: 40px;
+    min-height: 24px;
     word-break: break-word;
+    margin: 0.2rem;
     overflow-wrap: break-word;
 }
 
@@ -406,10 +414,9 @@
     text-align: left;
     background-color: transparent;
     border: 1px solid #87CEEB;
+    color: #234343;
     border-radius: 16px;
-    padding: 0.3rem 0.5rem;
-    margin: 0.1rem;
-    min-height: 32px;
+    padding: 0.1rem 0.5rem;
 }
 
 .editableCell:hover {
@@ -421,7 +428,7 @@
     width: 100%;
     min-height: 32px;
     padding: 0.3rem 0.5rem;
-    border: 2px solid #0f7ee9;
+    border: 2px solid #999;
     border-radius: 4px;
     font-size: 14px;
     text-align: left;
@@ -436,7 +443,33 @@
 }
 
 
-/* Loading and Empty States */
+.threeDots{
+    font-weight: 600;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #0f7ee9;
+    height: 24px;
+}
+
+.rightArrow{
+    font-weight: 600;
+    font-size: 24px;
+    display: flex;
+    width: 1px;
+    align-items: center;
+    color: #0f7ee9;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.rightArrow.active{
+    visibility: visible;
+}
+
+
 .loadingMessage, .emptyMessage {
     padding: 2rem;
     text-align: center;
